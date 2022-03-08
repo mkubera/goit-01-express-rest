@@ -24,9 +24,11 @@ const cat = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+
 cat.methods.fullName = function () {
   console.log(`${this.nickname} ${this.age}`);
 };
+
 const Cat = mongoose.model("cat", cat);
 
 module.exports = Cat;

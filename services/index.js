@@ -13,7 +13,17 @@ const createCat = ({
   return Cat.create({ nickname, age, owner });
 };
 
+const updateCat = (id, fields) => {
+  console.log(`updateCat -- `, id);
+  console.log(`updateCat -- `, fields);
+  return Cat.findByIdAndUpdate({ _id: id }, fields, {
+    new: true,
+    upsert: false,
+  });
+};
+
 module.exports = {
   getAllCats,
   createCat,
+  updateCat,
 };

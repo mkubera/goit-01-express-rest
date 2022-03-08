@@ -13,9 +13,20 @@ router.get("/", (req, res, next) => {
     })
     .catch(console.log);
 });
+
 router.post("/", (req, res, next) => {
   services
-    .createCat({ nickname: req.body.nickname })
+    .createCat({ nickname: req.body?.nickname })
+    .then((c) => {
+      console.log(`c`, c);
+      jsonResponse(res, 200, c);
+    })
+    .catch(console.log);
+});
+
+router.put("/:id", (req, res, next) => {
+  services
+    .updateCat(req.params?.id, req.body)
     .then((c) => {
       console.log(`c`, c);
       jsonResponse(res, 200, c);
