@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const cat = new Schema(
+const catSchema = new Schema(
   {
     nickname: {
       type: String,
@@ -25,10 +25,10 @@ const cat = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-cat.methods.fullName = function () {
+catSchema.methods.fullName = function () {
   console.log(`${this.nickname} ${this.age}`);
 };
 
-const Cat = mongoose.model("cat", cat);
+const Cat = mongoose.model("cat", catSchema);
 
 module.exports = Cat;

@@ -39,9 +39,7 @@ mongoose.connect(
 //   })
 //   .catch(console.log);
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const catsRouter = require("./routes/cats");
+require("./config/config-passport");
 
 const app = express();
 
@@ -56,6 +54,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+const catsRouter = require("./routes/cats");
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/cats", catsRouter);

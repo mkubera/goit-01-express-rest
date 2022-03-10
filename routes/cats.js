@@ -8,28 +8,45 @@ router.get("/", (req, res, next) => {
   services
     .getAllCats()
     .then((cx) => {
-      console.log(`cx`, cx);
-      jsonResponse(res, 200, cx);
+      const jsonData = {
+        status: "OK",
+        code: 200,
+        data: { cats: cx },
+      };
+      jsonResponse(res, jsonData);
     })
     .catch(console.log);
 });
 
 router.post("/", (req, res, next) => {
+  const { nickname } = req.body;
   services
-    .createCat({ nickname: req.body?.nickname })
+    .createCat({ nickname })
     .then((c) => {
-      console.log(`c`, c);
-      jsonResponse(res, 200, c);
+      const jsonData = {
+        status: "Created",
+        code: 201,
+        data: { message: "Cat created.", cat: c },
+      };
+      jsonResponse(res, jsonData);
     })
     .catch(console.log);
 });
 
 router.put("/:id", (req, res, next) => {
+  const {
+    params: { id },
+    body,
+  } = req;
   services
-    .updateCat(req.params?.id, req.body)
+    .updateCat(id, body)
     .then((c) => {
-      console.log(`c`, c);
-      jsonResponse(res, 200, c);
+      const jsonData = {
+        status: "OK",
+        code: 200,
+        data: { message: "Cat updated.", cat: c },
+      };
+      jsonResponse(res, jsonData);
     })
     .catch(console.log);
 });
